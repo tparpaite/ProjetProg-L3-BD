@@ -11,7 +11,8 @@ CREATE TABLE `sport`(
 CREATE TABLE `discipline`(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(30),
-  `id_sport` int(11) REFERENCES `sport`(`id`)
+  `id_sport` int(11),
+  CONSTRAINT `FK_discipline_sport` FOREIGN KEY `id_sport` REFERENCES `sport`(`id`)
 )ENGINE=InnoDB;
 
 CREATE TABLE `event_gender`(
@@ -22,8 +23,10 @@ CREATE TABLE `event_gender`(
 CREATE TABLE `event`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60),
-  `id_discipline` int(11) REFERENCES `discipline`(`id`),
-  `code_gender` char(1) REFERENCES `event_gender`(`code`),
+  `id_discipline` int(11),
+  `code_gender` char(1),
+  CONSTRAINT `FK_event_discipline` FOREIGN KEY `id_discipline` REFERENCES `discipline`(`id`)
+  CONSTRAINT `FK_event_gender` FOREIGN KEY `code_gender` REFERENCES `event_gender`(`code`)
   PRIMARY KEY(`id`, `code_gender`)
 )ENGINE=InnoDB;
 
