@@ -56,13 +56,13 @@ CREATE TABLE `city` (
 )ENGINE=InnoDB;
 
 CREATE TABLE `edition` (
-       `year` year NOT NULL PRIMARY KEY,
+       `year` SMALLINT NOT NULL PRIMARY KEY,
        `id_city` int(11),
        CONSTRAINT `FK_edition_city` FOREIGN KEY (`id_city`) REFERENCES `city`(`id`)
 )ENGINE=InnoDB;
 
 CREATE TABLE `medallist` (
-       `edition` year NOT NULL,
+       `edition` SMALLINT NOT NULL,
        `id_event` int(11) NOT NULL,
        `code_gender` char(1) NOT NULL,
        `id_athlete` int(11) NOT NULL,

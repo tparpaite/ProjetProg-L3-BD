@@ -5,12 +5,12 @@ USE `SummerOlympicGames_Flat`;
 
 CREATE TABLE `medallist` (
   `city` varchar(30),
-  `edition` year,
+  `edition` SMALLINT,
   `sport` varchar(30),
   `discipline` varchar(30),
   `athlete` varchar(60),
   `NOC` char(3),
-  `country` varchar(60),
+  `country` varchar(100),
   `ISO_code` char(2),
   `gender` varchar(5),
   `event` varchar(60),
