@@ -43,7 +43,8 @@ CREATE TABLE `athlete` (
        `name` varchar(60),
        `first_name` varchar(60),
        `gender` varchar(5),
-       `NOC` char(3) REFERENCES `country`(`NOC`)
+       `NOC` char(3),
+       CONSTRAINT `FK_athlete_country` FOREIGN KEY `NOC` REFERENCES `country`(`NOC`)
 )ENGINE=InnoDB;
 
 CREATE TABLE `city` (
@@ -53,7 +54,8 @@ CREATE TABLE `city` (
 
 CREATE TABLE `edition` (
        `year` year NOT NULL PRIMARY KEY,
-       `id_city` int(11) REFERENCES `city`(`id`)
+       `id_city` int(11),
+       CONSTRAINT `FK_edtion_city` FOREIGN KEY `id_city` REFERENCES `city`(`id`)
 )ENGINE=InnoDB;
 
 CREATE TABLE `medallist` (
@@ -61,8 +63,9 @@ CREATE TABLE `medallist` (
        `id_event` int(11) NOT NULL,
        `code_gender` char(1) NOT NULL,
        `id_athlete` int(11) NOT NULL,
-       `code_medal` char(1) REFERENCES `medal`(`code`),
-       CONSTRAINT `FK_medallist_athlete` FOREIGN KEY`id_athlete` REFERENCES `athlete`(`id`),
-       CONSTRAINT `FK_medallist_event`  FOREIGN KEY (`id_event`, `code_gender`) REFERENCES `event`(`id`, `code_gender`),
+       `code_medal` char(1),
+       CONSTRAINT `FK_medallist_medal`   FOREIGN KEY `code_medal` REFERENCES `medal`(`code`),
+       CONSTRAINT `FK_medallist_athlete` FOREIGN KEY`id_athlete`  REFERENCES `athlete`(`id`),
+       CONSTRAINT `FK_medallist_event`   FOREIGN KEY (`id_event`, `code_gender`) REFERENCES `event`(`id`, `code_gender`),
        PRIMARY KEY (`edition`, `id_event`, `code_gender`, `id_athlete`)
 )ENGINE=InnoDB;
