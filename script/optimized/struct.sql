@@ -1,12 +1,25 @@
+/* Projet de base de données
+ * Université de Bordeaux (licence 3)
+ * PARPAITE Thibault
+ * SARRABAYROUSE Alexis
+ * 11 avril 2016
+ *
+ * Code SQL permettant de créer une BD optimisée
+ */
+
 DROP DATABASE IF EXISTS `SummerOlympicGames_Optimized`;
 CREATE DATABASE `SummerOlympicGames_Optimized` CHARACTER SET `utf8`;
 
 USE `SummerOlympicGames_Optimized`;
 
+/* USE `thparpai`; */
+
 CREATE TABLE `sport`(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(11)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE `discipline`(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -15,10 +28,14 @@ CREATE TABLE `discipline`(
   CONSTRAINT `FK_discipline_sport` FOREIGN KEY (`id_sport`) REFERENCES `sport`(`id`)
 )ENGINE=InnoDB;
 
+
+
 CREATE TABLE `event_gender`(
   `code` char(1) NOT NULL PRIMARY KEY,
   `name` varchar(20)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE `event`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -30,16 +47,22 @@ CREATE TABLE `event`(
   PRIMARY KEY(`id`, `code_gender`)
 )ENGINE=InnoDB;
 
+
+
 CREATE TABLE `medal`(
   `code` char(1) NOT NULL PRIMARY KEY,
-  `name` varchar(611)
+  `name` varchar(30)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE `country` (
        `NOC` char (3) NOT NULL PRIMARY KEY,
-       `name` varchar(60),
+       `name` varchar(100),
        `ISO_code` char(2)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE `athlete` (
        `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -50,16 +73,22 @@ CREATE TABLE `athlete` (
        CONSTRAINT `FK_athlete_country` FOREIGN KEY (`NOC`) REFERENCES `country`(`NOC`)
 )ENGINE=InnoDB;
 
+
+
 CREATE TABLE `city` (
        `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
        `name` varchar(60)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE `edition` (
        `year` SMALLINT NOT NULL PRIMARY KEY,
        `id_city` int(11),
        CONSTRAINT `FK_edition_city` FOREIGN KEY (`id_city`) REFERENCES `city`(`id`)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE `medallist` (
        `edition` SMALLINT NOT NULL,
