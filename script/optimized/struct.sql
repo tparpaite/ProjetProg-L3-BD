@@ -39,12 +39,10 @@ CREATE TABLE `event_gender`(
 
 CREATE TABLE `event`(
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code_gender` char(1) NOT NULL,
   `name` varchar(60),
   `id_discipline` int(11),
   CONSTRAINT `FK_event_discipline` FOREIGN KEY (`id_discipline`) REFERENCES `discipline`(`id`),
-  CONSTRAINT `FK_event_gender`     FOREIGN KEY (`code_gender`)   REFERENCES `event_gender`(`code`),
-  PRIMARY KEY(`id`, `code_gender`)
+  PRIMARY KEY(`id`)
 )ENGINE=InnoDB;
 
 
@@ -99,6 +97,7 @@ CREATE TABLE `medallist` (
        CONSTRAINT `FK_medallist_edition` FOREIGN KEY (`edition`)    REFERENCES `edition`(`year`),
        CONSTRAINT `FK_medallist_medal`   FOREIGN KEY (`code_medal`) REFERENCES `medal`(`code`),
        CONSTRAINT `FK_medallist_athlete` FOREIGN KEY (`id_athlete`) REFERENCES `athlete`(`id`),
-       CONSTRAINT `FK_medallist_event`   FOREIGN KEY (`id_event`, `code_gender`) REFERENCES `event`(`id`, `code_gender`),
+       CONSTRAINT `FK_medallist_event`   FOREIGN KEY (`id_event`) REFERENCES `event`(`id`),
+       CONSTRAINT `FK_medallist_code_gender`   FOREIGN KEY (`code_gender`) REFERENCES `event_gender`(`code`),	
        PRIMARY KEY (`edition`, `id_event`, `code_gender`, `id_athlete`)
 )ENGINE=InnoDB;
