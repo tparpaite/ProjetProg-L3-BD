@@ -16,7 +16,7 @@ USE `SummerOlympicGames_Optimized`;
 
 CREATE TABLE `sport`(
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` varchar(11)
+  `name` varchar(30)
 )ENGINE=InnoDB;
 
 

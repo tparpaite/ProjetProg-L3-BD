@@ -40,8 +40,8 @@ for row in IOC_country_codes:
     IOC[row[1]] = {'name': row[0], 'iso': row[2]}
 
 
-    
-# On créé une requête et on remplit la BD    
+
+# On créé une requête et on remplit la BD
 query = "INSERT INTO `medallist` (`city`, `edition`, `sport`, `discipline`, `athlete`, `NOC`, `country`, `ISO_code`, `gender`, `event`, `event_gender`, `medal`) \
          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
@@ -52,5 +52,5 @@ for row in all_medalists:
     except Exception as e:
         print(e)
         print(data);
-        
+
 db.commit()
