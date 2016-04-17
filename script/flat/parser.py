@@ -23,13 +23,13 @@ cursor = db.cursor()
 
 
 # Ouverture des fichiers csv et création d'un reader
-all_medalists     = csv.reader(open("../../csv/all_medalists.csv"))
+all_medallists     = csv.reader(open("../../csv/all_medalists.csv"))
 IOC_country_codes = csv.reader(open("../../csv/IOC_country_codes.csv"))
 
 
 
 # On passe la première ligne qui contient le nom des attributs
-all_medalists.next()
+all_medallists.next()
 IOC_country_codes.next()
 
 
@@ -42,10 +42,12 @@ for row in IOC_country_codes:
 
 
 # On créé une requête et on remplit la BD
+print("All_medallists...")
+
 query = "INSERT INTO `medallist` (`city`, `edition`, `sport`, `discipline`, `athlete`, `NOC`, `country`, `ISO_code`, `gender`, `event`, `event_gender`, `medal`) \
          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
-for row in all_medalists:
+for row in all_medallists:
     data = (row[0], row[1], row[2], row[3], row[4], row[5], IOC[row[5]]['name'], IOC[row[5]]['iso'], row[6], row[7], row[8], row[9])
     try:
         cursor.execute(query, data)
@@ -54,3 +56,6 @@ for row in all_medalists:
         print(data);
 
 db.commit()
+
+print("Successfully imported !")
+
