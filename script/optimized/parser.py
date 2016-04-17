@@ -51,18 +51,18 @@ cursor.execute(query_medal, data)
 
 
 
-# Table `event_gender`
-print("Event Gender...")
-query_event_gender = "INSERT INTO `event_gender` (`code`, `name`) VALUES (%s, %s)"
+# Table `gender`
+print("Gender...")
+query_gender = "INSERT INTO `gender` (`code`, `name`) VALUES (%s, %s)"
 
 data = ('M', 'Men')
-cursor.execute(query_event_gender, data)
+cursor.execute(query_gender, data)
 
 data = ('W', 'Women')
-cursor.execute(query_event_gender, data)
+cursor.execute(query_gender, data)
 
 data = ('X', 'Mixed')
-cursor.execute(query_event_gender, data)
+cursor.execute(query_gender, data)
 
 
 
@@ -124,7 +124,7 @@ print("Athlete...")
 query_select_athlete = "SELECT DISTINCT `athlete`, `gender`, `NOC` FROM `medallist`"
 cursor_flat.execute(query_select_athlete)
 athlete = cursor_flat.fetchall()
-query_athlete = "INSERT INTO `athlete` (`name`, `first_name`, `gender`, `NOC`) VALUES (%s, %s, %s, %s)"
+query_athlete = "INSERT INTO `athlete` (`name`, `first_name`, `code_gender`, `NOC`) VALUES (%s, %s, (SELECT `code` FROM `gender` WHERE `name` = %s), %s)"
 
 for data in athlete:
     st = data[0].split(", ", 1)
