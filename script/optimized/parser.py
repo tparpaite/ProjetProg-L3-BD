@@ -166,7 +166,7 @@ for data in edition:
 # Table `medallist`
 print("Medallist...")
 
-query_select_medallist = "SELECT DISTINCT `edition`, `event`, `discipline`, `event_gender`, `athlete`, `NOC`, `medal` FROM `medallist`"
+query_select_medallist = "SELECT `edition`, `event`, `discipline`, `event_gender`, `athlete`, `NOC`, `medal` FROM `medallist`"
 cursor_flat.execute(query_select_medallist)
 medallist = cursor_flat.fetchall()
 
