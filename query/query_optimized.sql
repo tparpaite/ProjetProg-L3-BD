@@ -1,4 +1,5 @@
 RESET QUERY CACHE;
+FLUSH TABLES;
 
 SELECT COUNT(*) as "nombre total de médailles"
 FROM medallist;
@@ -41,4 +42,9 @@ FROM (
   WHERE medal.name = "Gold"
   GROUP BY country.NOC, edition) as tmp
 GROUP BY tmp.NOC
-ORDER BY moyenne DESC;
+ORDER BY moyenne DESC, tmp.name;
+
+SELECT city.name,edition.year
+FROM city
+JOIN edition ON id_city = id
+ORDER BY edition.year;

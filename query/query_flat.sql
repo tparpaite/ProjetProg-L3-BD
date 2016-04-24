@@ -31,4 +31,8 @@ FROM (
   WHERE medal = "Gold"
   GROUP BY NOC, edition) as tmp
 GROUP BY tmp.NOC
-ORDER BY moyenne DESC;
+ORDER BY moyenne DESC, tmp.country;
+
+SELECT DISTINCT city,edition
+FROM medallist
+ORDER BY edition;
