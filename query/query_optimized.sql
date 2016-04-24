@@ -48,3 +48,14 @@ SELECT city.name,edition.year
 FROM city
 JOIN edition ON id_city = id
 ORDER BY edition.year;
+
+SELECT "Event des JO de 2004" as "";
+SELECT sport.name, discipline.name, event.name
+FROM event
+JOIN discipline ON id_discipline = discipline.id
+JOIN sport ON id_sport = sport.id
+WHERE event.id IN (
+  SELECT DISTINCT id_event
+  FROM medallist
+  WHERE edition = 2004)
+ORDER BY sport.name, discipline.name, event.name;

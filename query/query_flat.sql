@@ -36,3 +36,9 @@ ORDER BY moyenne DESC, tmp.country;
 SELECT DISTINCT city,edition
 FROM medallist
 ORDER BY edition;
+
+SELECT "Event des JO de 2014" as "";
+SELECT DISTINCT sport, discipline, event
+FROM medallist
+WHERE edition = 2004
+ORDER BY sport, discipline, event;
