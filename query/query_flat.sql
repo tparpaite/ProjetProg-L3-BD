@@ -42,3 +42,26 @@ SELECT DISTINCT sport, discipline, event
 FROM medallist
 WHERE edition = 2004
 ORDER BY sport, discipline, event;
+
+
+/* La liste des évenements dans la catégorie natation */
+SELECT DISTINCT event
+FROM medallist
+WHERE sport =  "Aquatics"
+LIMIT 0 , 30
+
+
+/* Les athlètes français les plus médaillés */
+SELECT athlete, count(medal) as "Nombre de médailles"
+FROM medallist
+WHERE country = "France"
+GROUP BY (athlete)
+ORDER BY "Nombre de médailles" DESC;
+
+
+/* Les meilleurs nageurs de l'histoire des JO */
+SELECT athlete, count(medal) as "Nombre de médailles"
+FROM medallist
+WHERE sport = "Aquatics"
+GROUP BY (athlete)
+ORDER BY "Nombre de médailles" DESC

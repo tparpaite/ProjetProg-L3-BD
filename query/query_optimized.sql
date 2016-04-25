@@ -59,3 +59,33 @@ WHERE event.id IN (
   FROM medallist
   WHERE edition = 2004)
 ORDER BY sport.name, discipline.name, event.name;
+
+/* La liste des évenements dans la catégorie natation */
+SELECT event.name
+FROM event
+JOIN discipline ON id_discipline = discipline.id
+JOIN sport ON id_sport = sport.id
+WHERE sport.name =  "Aquatics"
+LIMIT 0 , 30
+
+
+/* Les athlètes français les plus médaillés */
+SELECT athlete.name, athlete.first_name, count(athlete.id) as "Nombre de médailles"
+FROM medallist
+JOIN athlete ON id_athlete = athlete.id
+JOIN country ON athlete.NOC = country.NOC
+WHERE country.name = "France"
+GROUP BY athlete.name, athlete.first_name
+ORDER BY "Nombre de médailles" DESC;
+
+
+/* Les meilleurs nageurs de l'histoire des JO */
+SELECT athlete.name, athlete.first_name, count(athlete.id) as "Nombre de médailles"
+FROM medallist
+JOIN athlete ON id_athlete = athlete.id
+JOIN event ON id_event = event.id
+JOIN discipline ON id_discipline = discipline.id
+JOIN sport ON id_sport = sport.id
+WHERE sport.name = "Aquatics"
+GROUP BY athlete.name, athlete.first_name
+ORDER BY "Nombre de médailles" DESC
