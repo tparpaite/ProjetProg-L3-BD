@@ -37,7 +37,7 @@ SELECT DISTINCT city,edition
 FROM medallist
 ORDER BY edition;
 
-SELECT "Event des JO de 2014" as "";
+SELECT "Event des JO de 2004" as "";
 SELECT DISTINCT sport, discipline, event
 FROM medallist
 WHERE edition = 2004
@@ -65,3 +65,71 @@ FROM medallist
 WHERE sport = "Aquatics"
 GROUP BY (athlete)
 ORDER BY "Nombre de médailles" DESC
+
+SELECT country, count(DISTINCT athlete) as nb_athlete
+FROM medallist
+GROUP BY NOC
+ORDER BY nb_athlete DESC;
+
+/* Athlete avec plus de 10 medal */
+SELECT athlete, gender, country, count(athlete) as nb_medal
+FROM medallist
+GROUP BY athlete
+HAVING nb_medal > 10
+ORDER BY nb_medal DESC, athlete;
+
+
+
+SELECT IF(
+    LOCATE(', ', athlete) > 0,
+    SUBSTRING_INDEX(athlete, ', ', -1),
+    NULL
+    ) as first_name
+FROM (
+    SELECT DISTINCT athlete
+    FROM medallist
+    ) as t
+HAVING first_name NOT LIKE "_."
+AND <> ""
+
+
+SELECT IF(
+    LOCATE(', ', tmp.athlete) > 0,
+    SUBSTRING_INDEX(tmp.athlete, ', ', -1),
+    NULL
+    ) as first_name
+FROM (
+    SELECT DISTINCT athlete
+    FROM medallist
+  ) as tmp;
+
+
+
+SELECT first_name, count(first_name) as nb
+FROM (
+  SELECT IF(
+      LOCATE(', ', athlete) > 0,
+      SUBSTRING_INDEX(athlete, ', ', -1),
+      NULL
+      ) as first_name
+  FROM (
+      SELECT DISTINCT athlete, NOC
+      FROM medallist
+      ) as athlete
+) as t
+WHERE first_name IS NOT NULL
+AND first_name NOT LIKE "_."
+GROUP BY first_name
+HAVING nb > 20
+ORDER BY nb DESC, first_name;
+
+
+
+SELECT SUBSTRING_INDEX(athlete, ', ', -1) as first_name, count(athlete) as nb
+FROM medallist
+WHERE first_name <> ""
+AND first_name NOT LIKE "_."
+GROUP BY first_name
+HAVING nb > 20
+ORDER BY nb DESC, first_name;
+

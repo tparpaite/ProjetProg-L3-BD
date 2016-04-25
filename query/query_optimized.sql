@@ -60,6 +60,7 @@ WHERE event.id IN (
   WHERE edition = 2004)
 ORDER BY sport.name, discipline.name, event.name;
 
+
 /* La liste des évenements dans la catégorie natation */
 SELECT event.name
 FROM event
@@ -89,3 +90,31 @@ JOIN sport ON id_sport = sport.id
 WHERE sport.name = "Aquatics"
 GROUP BY athlete.name, athlete.first_name
 ORDER BY "Nombre de médailles" DESC
+
+
+SELECT country.name, count(id) as nb_athlete
+FROM athlete
+JOIN country ON athlete.NOC = country.NOC
+GROUP BY country.NOC
+ORDER BY nb_athlete DESC;
+
+/* Athlete avec plus de 10 medal */
+SELECT athlete.name, athlete.first_name, gender.name as gender, country.name as country, count(id_athlete) as nb_medal
+FROM medallist
+JOIN athlete ON id_athlete = athlete.id
+JOIN country ON athlete.NOC = country.NOC
+JOIN gender  ON athlete.code_gender = gender.code
+GROUP BY id_athlete
+HAVING nb_medal > 10
+ORDER BY nb_medal DESC, athlete.name, athlete.first_name;
+
+/* Prenom le plus courant des Athlete */
+
+SELECT first_name, count(first_name) as nb
+FROM athlete
+WHERE first_name <> "N-C"
+AND first_name NOT LIKE "_."
+GROUP BY first_name
+HAVING nb > 20
+ORDER BY nb DESC, first_name;
+
