@@ -71,16 +71,16 @@ WHERE sport =  "Aquatics"
 LIMIT 0 , 30
 
 /* Les athlètes français les plus médaillés */
-SELECT athlete, count(medal) AS "Nombre de médailles"
+SELECT athlete, count(medal) AS nb_medals
 FROM medallist
 WHERE country = "France"
 GROUP BY (athlete)
-ORDER BY "Nombre de médailles" DESC;
+ORDER BY nb_medals DESC;
 
 
 /* Les meilleurs nageurs de l'histoire des JO */
-SELECT athlete, count(medal) AS "Nombre de médailles"
+SELECT athlete, count(medal) AS nb_medals
 FROM medallist
 WHERE sport = "Aquatics"
 GROUP BY (athlete)
-ORDER BY "Nombre de médailles" DESC;
+ORDER BY nb_medals DESC;

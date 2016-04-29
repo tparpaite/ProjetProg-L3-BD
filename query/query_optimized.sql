@@ -82,17 +82,17 @@ LIMIT 0 , 30
 
 
 /* Les athlètes français les plus médaillés */
-SELECT athlete.name, athlete.first_name, count(athlete.id) AS "Nombre de médailles"
+SELECT athlete.name, athlete.first_name, count(athlete.id) AS nb_medals
 FROM medallist
 JOIN athlete ON id_athlete = athlete.id
 JOIN country ON athlete.NOC = country.NOC
 WHERE country.name = "France"
 GROUP BY athlete.name, athlete.first_name
-ORDER BY "Nombre de médailles" DESC;
+ORDER BY nb_medals DESC;
 
 
 /* Les meilleurs nageurs de l'histoire des JO */
-SELECT athlete.name, athlete.first_name, count(athlete.id) AS "Nombre de médailles"
+SELECT athlete.name, athlete.first_name, count(athlete.id) AS nb_medals
 FROM medallist
 JOIN athlete ON id_athlete = athlete.id
 JOIN event ON id_event = event.id
@@ -100,4 +100,4 @@ JOIN discipline ON id_discipline = discipline.id
 JOIN sport ON id_sport = sport.id
 WHERE sport.name = "Aquatics"
 GROUP BY athlete.name, athlete.first_name
-ORDER BY "Nombre de médailles" DESC;
+ORDER BY nb_medals DESC;
